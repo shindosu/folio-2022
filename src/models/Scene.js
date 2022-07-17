@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import Debugger from './Debugger';
+// import Debugger from './Debugger';
 import * as browser from '../modules/browser';
 import * as staticMaterials from '../modules/staticMaterial';
 import colorCode from '../modules/colorCode';
@@ -32,7 +32,7 @@ class Scene {
     this.#configureControls();
 
     this.#addModel();
-    this.#addDebugger();
+    // this.#addDebugger();
 
     this.scene.background = new THREE.Color(colorCode.spindle);
     this.scene.add(this.ocean);
@@ -42,13 +42,13 @@ class Scene {
     this.#resize();
   }
 
-  #addDebugger() {
-    const debugConsole = new Debugger();
+  // #addDebugger() {
+  //   const debugConsole = new Debugger();
 
-    debugConsole.camera(this.camera.position);
-    debugConsole.ocean(this.ocean.material.uniforms, this.ocean.position);
-    debugConsole.sky(this.scene.background);
-  }
+  //   debugConsole.camera(this.camera.position);
+  //   debugConsole.ocean(this.ocean.material.uniforms, this.ocean.position);
+  //   debugConsole.sky(this.scene.background);
+  // }
 
   #addModel() {
     this.gltfLoader.load(
