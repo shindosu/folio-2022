@@ -24,6 +24,29 @@ class Scene {
     this.clock = new THREE.Clock();
     this.ocean = Ocean.water();
     this.boat = null;
+    this.points = [
+      {
+        position: new THREE.Vector3(3.0, 0, -9.5),
+        element: document.getElementById('point-about')
+      },
+      {
+        position: new THREE.Vector3(-3.0, 0, -9.5),
+        element: document.getElementById('point-philosophy')
+      },
+      {
+        position: new THREE.Vector3(3.0, 0, -15.5),
+        element: document.getElementById('point-work')
+      },
+      {
+        position: new THREE.Vector3(-1.0, 0, -15.5),
+        element: document.getElementById('point-contact')
+      },
+      {
+        position: new THREE.Vector3(0, 0, -18.5),
+        element: document.getElementById('point-credit')
+      }
+    ];
+    this.raycaster = new THREE.Raycaster();
   }
 
   start() {
