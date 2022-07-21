@@ -73,6 +73,35 @@ class Scene {
   //   debugConsole.sky(this.scene.background);
   // }
 
+  #togglePointDisplay() {
+    this.points.forEach(point => {
+      const screenPosition = point.position.clone();
+      const intersects = this.raycaster.intersectObjects(this.scene.children, true);
+
+      screenPosition.project(this.camera);
+      this.raycaster.setFromCamera(screenPosition, this.camera);
+
+      if (point.element) {
+        if (intersects.length === 0) {
+          point.element.classList.add('show');
+        } else {
+          const intersectionDistance = intersects[0].distance;
+          const pointDistance = point.position.distanceTo(this.camera.position);
+
+          if (intersectionDistance < pointDistance) {
+            point.element.classList.remove('show');
+          } else {
+            point.element.classList.add('show');
+          }
+        }
+      }
+
+      const translateX = screenPosition.x * window.innerWidth * 0.5;
+      const translateY = -screenPosition.y * window.innerHeight * 0.5;
+      point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
+    });
+  }
+
   #addModel() {
     this.gltfLoader.load(
       this.modelPath,
@@ -133,6 +162,7 @@ class Scene {
     if (this.boat) this.boat.position.y = 0.05 * Math.sin(this.clock.getElapsedTime()) - 1.5;
 
     this.controls.update();
+    this.#togglePointDisplay();
 
     this.renderer.render(this.scene, this.camera);
 
