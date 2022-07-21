@@ -1,0 +1,26 @@
+.point {
+  display: none;
+  &.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.outer-circle
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ffffff77;
+    background-color: transparent;
+}
+
+.inner-circle {
+  height: 40%;
+  width: 40%;
+  background-color: white;
+  border-radius: 50%;
+}
