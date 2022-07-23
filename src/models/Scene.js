@@ -3,11 +3,12 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 // import Debugger from './Debugger';
-import * as browser from '../modules/browser';
+import browser from '../modules/browser';
 import * as staticMaterials from '../modules/staticMaterial';
 import colorCode from '../modules/colorCode';
 import Ocean from './Ocean';
 import Camera from './Camera';
+import gsapTo from '../modules/gsap';
 
 class Scene {
   constructor(htmlElement, textures, modelPath) {
