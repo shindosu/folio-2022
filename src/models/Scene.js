@@ -74,6 +74,47 @@ class Scene {
   //   debugConsole.sky(this.scene.background);
   // }
 
+  #moveCamera() {
+    document.querySelectorAll('.nav-links').forEach(navLink => {
+      navLink.addEventListener('click', event => {
+        switch (event.target.id) {
+          case 'nav-about-link':
+            gsapTo(this.controls.target, 12.1, 0.0, -14.0);
+            gsapTo(this.camera.position, -1.7, -0.8, -6.5);
+
+            break;
+          case 'nav-philosophy-link':
+            gsapTo(this.controls.target, -11.3, 0.8, -4.2);
+            gsapTo(this.camera.position, 2.3, -0.9, -11.7);
+
+            break;
+          case 'nav-works-link':
+            gsapTo(this.controls.target, 7.7, 0.3, -19.0);
+            gsapTo(this.camera.position, -0.9, -0.7, -13.6);
+
+            break;
+          case 'nav-contact-link':
+            gsapTo(this.controls.target, -7.0, -0.7, -17.0);
+            gsapTo(this.camera.position, 2.3, -0.7, -12.8);
+
+            break;
+          case 'nav-credits-link':
+            gsapTo(this.controls.target, -6.5, -2.8, -21.5);
+            gsapTo(this.camera.position, 5.8, -0.4, -31.0);
+
+            break;
+          default:
+            gsapTo(this.controls.target, -1.6, -0.4, 2.1);
+            gsapTo(this.camera.position, -5.7, -0.5, 11.5);
+
+            break;
+        }
+      });
+
+      this.controls.update();
+    });
+  }
+
   #togglePointDisplay() {
     this.points.forEach(point => {
       const screenPosition = point.position.clone();
