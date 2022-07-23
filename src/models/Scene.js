@@ -81,39 +81,37 @@ class Scene {
       navLink.addEventListener('click', event => {
         switch (event.target.id) {
           case 'nav-about-link':
-            gsapTo(this.controls.target, 12.1, 0.0, -14.0);
-            gsapTo(this.camera.position, -1.7, -0.8, -6.5);
+            gsapTo(this.controls.target, 12.1, 0.0, -14.0, this.controls, 'controls');
+            gsapTo(this.camera.position, -1.7, -0.8, -6.5, this.controls, 'camera');
 
             break;
           case 'nav-philosophy-link':
-            gsapTo(this.controls.target, -11.3, 0.8, -4.2);
-            gsapTo(this.camera.position, 2.3, -0.9, -11.7);
+            gsapTo(this.controls.target, -11.3, 0.8, -4.2, this.controls, 'controls');
+            gsapTo(this.camera.position, 2.3, -0.9, -11.7, this.controls, 'camera');
 
             break;
           case 'nav-works-link':
-            gsapTo(this.controls.target, 7.7, 0.3, -19.0);
-            gsapTo(this.camera.position, -0.9, -0.7, -13.6);
+            gsapTo(this.controls.target, 7.7, 0.3, -19.0, this.controls, 'controls');
+            gsapTo(this.camera.position, -0.9, -0.7, -13.6, this.controls, 'camera');
 
             break;
           case 'nav-contact-link':
-            gsapTo(this.controls.target, -7.0, -0.7, -17.0);
-            gsapTo(this.camera.position, 2.3, -0.7, -12.8);
+            gsapTo(this.controls.target, -7.0, -0.7, -17.0, this.controls, 'controls');
+            gsapTo(this.camera.position, 2.3, -0.7, -12.8, this.controls, 'camera');
 
             break;
           case 'nav-credits-link':
-            gsapTo(this.controls.target, -6.5, -2.8, -21.5);
-            gsapTo(this.camera.position, 5.8, -0.4, -31.0);
+            gsapTo(this.controls.target, -6.5, -2.8, -21.5, this.controls, 'controls');
+            gsapTo(this.camera.position, 5.8, -0.4, -31.0, this.controls, 'camera');
 
             break;
           default:
-            gsapTo(this.controls.target, -1.6, -0.4, 2.1);
-            gsapTo(this.camera.position, -5.7, -0.5, 11.5);
+            gsapTo(this.controls.target, -1.6, -0.4, 2.1, this.controls, 'controls');
+            gsapTo(this.camera.position, -5.7, -0.5, 11.5, this.controls, 'camera');
 
             break;
         }
       });
-
-      this.controls.update();
     });
   }
 
