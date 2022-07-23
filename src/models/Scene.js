@@ -184,8 +184,8 @@ class Scene {
   }
 
   #configureRenderer() {
-    this.renderer.setSize(browser.default.width, browser.default.height);
-    this.renderer.setPixelRatio(browser.default.pixelRatio);
+    this.renderer.setSize(browser.width, browser.height);
+    this.renderer.setPixelRatio(browser.pixelRatio);
     this.renderer.outputEncoding = THREE.sRGBEncoding;
   }
 
@@ -232,7 +232,7 @@ class Scene {
       this.camera.updateProjectionMatrix();
 
       this.renderer.setSize(browserWidth, browserHeight);
-      this.renderer.setPixelRatio(browser.default.pixelRatio);
+      this.renderer.setPixelRatio(browser.pixelRatio);
     });
   }
 }
