@@ -16,7 +16,7 @@ class Scene {
     this.textures = textures;
     this.modelPath = modelPath;
     this.scene = new THREE.Scene();
-    this.camera = Camera.new();
+    this.camera = new Camera(45, browser.width / browser.height, 0.05, 900);
     this.controls = new OrbitControls(this.camera, this.htmlElement);
     this.renderer = new THREE.WebGLRenderer({ canvas: htmlElement, antialias: true });
     this.textureLoader = new THREE.TextureLoader();
