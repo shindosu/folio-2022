@@ -70,6 +70,7 @@ class Scene {
   // #addDebugger() {
   //   const debugConsole = new Debugger();
 
+  //   debugConsole.orbitControls(this.controls);
   //   debugConsole.camera(this.camera.position);
   //   debugConsole.ocean(this.ocean.material.uniforms, this.ocean.position);
   //   debugConsole.sky(this.scene.background);
