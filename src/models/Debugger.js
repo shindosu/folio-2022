@@ -10,9 +10,11 @@ class Debugger {
   camera(cameraPosition) {
     const cameraFolder = this.gui.addFolder('Camera');
 
-    cameraFolder.add(cameraPosition, 'x', -50, 50, 0.1);
-    cameraFolder.add(cameraPosition, 'y', -50, 50, 0.1);
-    cameraFolder.add(cameraPosition, 'z', -50, 50, 0.1);
+    cameraFolder.add(cameraPosition, 'x', -100, 100, 0.1);
+    cameraFolder.add(cameraPosition, 'y', -100, 100, 0.1);
+    cameraFolder.add(cameraPosition, 'z', -100, 100, 0.1);
+    cameraFolder.open();
+  }
 
     cameraFolder.open();
   }
