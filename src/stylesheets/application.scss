@@ -1,3 +1,4 @@
+@import './navbar.scss';
 @import './point.scss';
 @import './panel.scss';
 
@@ -16,4 +17,15 @@ canvas {
   left: 0;
   outline: none;
   z-index: -1;
+}
+
+.icon {
+  background-color: #F5F5F5;
+  width: 51px;
+  height: 51px;
+  border-radius: 50%;
+  svg: {
+    width: 25px;
+    height: 25px;
+  }
 }

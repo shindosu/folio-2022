@@ -10,11 +10,29 @@ class Debugger {
   camera(cameraPosition) {
     const cameraFolder = this.gui.addFolder('Camera');
 
-    cameraFolder.add(cameraPosition, 'x', -50, 50, 0.1);
-    cameraFolder.add(cameraPosition, 'y', -50, 50, 0.1);
-    cameraFolder.add(cameraPosition, 'z', -50, 50, 0.1);
-
+    cameraFolder.add(cameraPosition, 'x', -100, 100, 0.1);
+    cameraFolder.add(cameraPosition, 'y', -100, 100, 0.1);
+    cameraFolder.add(cameraPosition, 'z', -100, 100, 0.1);
     cameraFolder.open();
+  }
+
+  orbitControls(controls) {
+    const controlsFolder = this.gui.addFolder('Controls');
+    controlsFolder.add(controls.target, 'x').min(-50).max(50).step(0.1);
+    controlsFolder.add(controls.target, 'y').min(-50).max(50).step(0.1);
+    controlsFolder.add(controls.target, 'z').min(-50).max(50).step(0.1);
+    controlsFolder.add(controls, 'maxDistance').min(-50).max(50).step(0.1)
+      .name('maxDistance');
+    controlsFolder.add(controls, 'minDistance').min(-20).max(20).step(0.1)
+      .name('minDistance');
+    controlsFolder.add(controls, 'minAzimuthAngle').min(-20).max(20).step(0.1)
+      .name('minAzimuthAngle');
+    controlsFolder.add(controls, 'maxAzimuthAngle').min(-20).max(20).step(0.1)
+      .name('maxAzimuthAngle');
+    controlsFolder.add(controls, 'minPolarAngle').min(-20).max(20).step(0.1)
+      .name('minPolarAngle');
+    controlsFolder.add(controls, 'maxPolarAngle').min(-20).max(20).step(0.1)
+      .name('maxPolarAngle');
   }
 
   ocean(waterUniforms, oceanPosition) {

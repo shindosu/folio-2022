@@ -3,11 +3,12 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 // import Debugger from './Debugger';
-import * as browser from '../modules/browser';
+import browser from '../modules/browser';
 import * as staticMaterials from '../modules/staticMaterial';
 import colorCode from '../modules/colorCode';
 import Ocean from './Ocean';
 import Camera from './Camera';
+import gsapTo from '../modules/gsap';
 
 class Scene {
   constructor(htmlElement, textures, modelPath) {
@@ -15,7 +16,7 @@ class Scene {
     this.textures = textures;
     this.modelPath = modelPath;
     this.scene = new THREE.Scene();
-    this.camera = Camera.new();
+    this.camera = new Camera(45, browser.width / browser.height, 0.05, 900);
     this.controls = new OrbitControls(this.camera, this.htmlElement);
     this.renderer = new THREE.WebGLRenderer({ canvas: htmlElement, antialias: true });
     this.textureLoader = new THREE.TextureLoader();
@@ -55,6 +56,7 @@ class Scene {
     this.#configureControls();
 
     this.#addModel();
+    this.#moveCamera();
     // this.#addDebugger();
 
     this.scene.background = new THREE.Color(colorCode.spindle);
@@ -68,10 +70,50 @@ class Scene {
   // #addDebugger() {
   //   const debugConsole = new Debugger();
 
+  //   debugConsole.orbitControls(this.controls);
   //   debugConsole.camera(this.camera.position);
   //   debugConsole.ocean(this.ocean.material.uniforms, this.ocean.position);
   //   debugConsole.sky(this.scene.background);
   // }
+
+  #moveCamera() {
+    document.querySelectorAll('.nav-links').forEach(navLink => {
+      navLink.addEventListener('click', event => {
+        switch (event.target.id) {
+          case 'nav-about-link':
+            gsapTo(this.controls.target, 12.1, 0.0, -14.0, this.controls, 'controls');
+            gsapTo(this.camera.position, -1.7, -0.8, -6.5, this.controls, 'camera');
+
+            break;
+          case 'nav-philosophy-link':
+            gsapTo(this.controls.target, -11.3, 0.8, -4.2, this.controls, 'controls');
+            gsapTo(this.camera.position, 2.3, -0.9, -11.7, this.controls, 'camera');
+
+            break;
+          case 'nav-works-link':
+            gsapTo(this.controls.target, 7.7, 0.3, -19.0, this.controls, 'controls');
+            gsapTo(this.camera.position, -0.9, -0.7, -13.6, this.controls, 'camera');
+
+            break;
+          case 'nav-contact-link':
+            gsapTo(this.controls.target, -7.0, -0.7, -17.0, this.controls, 'controls');
+            gsapTo(this.camera.position, 2.3, -0.7, -12.8, this.controls, 'camera');
+
+            break;
+          case 'nav-credits-link':
+            gsapTo(this.controls.target, -6.5, -2.8, -21.5, this.controls, 'controls');
+            gsapTo(this.camera.position, 5.8, -0.4, -31.0, this.controls, 'camera');
+
+            break;
+          default:
+            gsapTo(this.controls.target, -1.6, -0.4, 2.1, this.controls, 'controls');
+            gsapTo(this.camera.position, -5.7, -0.5, 11.5, this.controls, 'camera');
+
+            break;
+        }
+      });
+    });
+  }
 
   #togglePointDisplay() {
     this.points.forEach(point => {
@@ -142,8 +184,8 @@ class Scene {
   }
 
   #configureRenderer() {
-    this.renderer.setSize(browser.default.width, browser.default.height);
-    this.renderer.setPixelRatio(browser.default.pixelRatio);
+    this.renderer.setSize(browser.width, browser.height);
+    this.renderer.setPixelRatio(browser.pixelRatio);
     this.renderer.outputEncoding = THREE.sRGBEncoding;
   }
 
@@ -154,6 +196,18 @@ class Scene {
 
   #configureControls() {
     this.controls.enableDamping = true;
+    this.controls.enableZoom = false;
+
+    this.controls.maxDistance = 15.6;
+    this.controls.minDistance = 4.8;
+    this.controls.minAzimuthAngle = -40;
+    this.controls.maxAzimuthAngle = 40;
+    this.controls.minPolarAngle = -40;
+    this.controls.maxPolarAngle = 40;
+    this.controls.target.set(-1.6, -0.4, 2.1);
+    this.camera.position.set(-5.7, -0.5, 11.5);
+
+    this.controls.update();
   }
 
   #tick() {
@@ -178,7 +232,7 @@ class Scene {
       this.camera.updateProjectionMatrix();
 
       this.renderer.setSize(browserWidth, browserHeight);
-      this.renderer.setPixelRatio(browser.default.pixelRatio);
+      this.renderer.setPixelRatio(browser.pixelRatio);
     });
   }
 }
