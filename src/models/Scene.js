@@ -56,6 +56,7 @@ class Scene {
     this.#configureControls();
 
     this.#addModel();
+    this.#moveCamera();
     // this.#addDebugger();
 
     this.scene.background = new THREE.Color(colorCode.spindle);
