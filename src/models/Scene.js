@@ -196,6 +196,18 @@ class Scene {
 
   #configureControls() {
     this.controls.enableDamping = true;
+    this.controls.enableZoom = false;
+
+    this.controls.maxDistance = 15.6;
+    this.controls.minDistance = 4.8;
+    this.controls.minAzimuthAngle = -40;
+    this.controls.maxAzimuthAngle = 40;
+    this.controls.minPolarAngle = -40;
+    this.controls.maxPolarAngle = 40;
+    this.controls.target.set(-1.6, -0.4, 2.1);
+    this.camera.position.set(-5.7, -0.5, 11.5);
+
+    this.controls.update();
   }
 
   #tick() {
