@@ -1,34 +1,26 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable */
 
-import { useState } from 'react';
-import client from '../../modules/contentful';
 import Anchor from '../Anchor';
 
 const Panel = props => {
-  const { sectionName, currentPointClicked, setCurrentPointClicked, otherPointStates } = props;
-
-  const [sectionContents, setSectionContents] = useState([]);
-
-  const contentfulModels = ['about', 'philosophy', 'work'];
+  const {
+    sectionName,
+    currentPointClicked,
+    setCurrentPointClicked,
+    sectionContents,
+    setSectionContents,
+    otherPointStates,
+    fetchPanelContents
+  } = props;
 
   const togglePanel = boolean => {
-    otherPointStates.forEach(otherPointState => {
+    otherPointStates(sectionName).forEach(otherPointState => {
       if (otherPointState.pointClicked) otherPointState.setPointClicked(false);
     });
 
     setCurrentPointClicked(boolean);
 
-    fetchPanelContents();
-  };
-
-  const fetchPanelContents = () => {
-    if (sectionContents.length === 0 && contentfulModels.includes(sectionName)) {
-      client.getEntries({ content_type: sectionName }).then(response => {
-        setSectionContents(response.items.map(panelContent => panelContent.fields));
-      }).catch(err => {
-        console.log(err);
-      });
-    }
+    fetchPanelContents(sectionName, sectionContents, setSectionContents);
   };
 
   return (
