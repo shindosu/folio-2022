@@ -25,8 +25,8 @@ const Panel = props => {
 
   return (
     <>
-      <button className="point outer-circle" id={`point-${sectionName}`} onClick={() => togglePanel(true)} onKeyDown={() => togglePanel(true)} type="button">
-        <div className="inner-circle" />
+      <button className="point outer-circle" id={`outer-point-${sectionName}`} onClick={() => togglePanel(true)} onKeyDown={() => togglePanel(true)} type="button">
+        <div className="inner-circle" id={`inner-point-${sectionName}`}/>
       </button>
       <div className={`panel ${currentPointClicked ? 'show' : ''}`}>
         <button onClick={() => togglePanel(false)} onKeyDown={() => togglePanel(false)} type="button">CLOSE</button>
