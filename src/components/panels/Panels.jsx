@@ -1,58 +1,96 @@
 import { useState } from 'react';
 import Panel from './Panel';
+import Navbar from '../Navbar';
+import getEntries from '../../modules/contentful';
 
 const Panels = () => {
   const [aboutPointClicked, setAboutPointClicked] = useState(false);
   const [philosophyPointClicked, setPhilosophyPointClicked] = useState(false);
-  const [workPointClicked, setWorkPointClicked] = useState(false);
+  const [worksPointClicked, setWorksPointClicked] = useState(false);
   const [contactPointClicked, setContactPointClicked] = useState(false);
   const [creditPointClicked, setCreditPointClicked] = useState(false);
 
-  const sectionStates = [
+  const [aboutSectionContents, setAboutSectionContents] = useState([]);
+  const [philosophySectionContents, setPhilosophySectionContents] = useState([]);
+  const [worksSectionContents, setWorksSectionContents] = useState([]);
+  const [contactSectionContents, setContactSectionContents] = useState([]);
+  const [creditSectionContents, setCreditSectionContents] = useState([]);
+
+  const sections = [
     {
       name: 'about',
       pointClicked: aboutPointClicked,
-      setPointClicked: setAboutPointClicked
+      setPointClicked: setAboutPointClicked,
+      contents: aboutSectionContents,
+      setContents: setAboutSectionContents
     },
     {
       name: 'philosophy',
       pointClicked: philosophyPointClicked,
-      setPointClicked: setPhilosophyPointClicked
+      setPointClicked: setPhilosophyPointClicked,
+      contents: philosophySectionContents,
+      setContents: setPhilosophySectionContents
     },
     {
-      name: 'work',
-      pointClicked: workPointClicked,
-      setPointClicked: setWorkPointClicked
+      name: 'works',
+      pointClicked: worksPointClicked,
+      setPointClicked: setWorksPointClicked,
+      contents: worksSectionContents,
+      setContents: setWorksSectionContents
     },
     {
       name: 'contact',
       pointClicked: contactPointClicked,
-      setPointClicked: setContactPointClicked
+      setPointClicked: setContactPointClicked,
+      contents: contactSectionContents,
+      setContents: setContactSectionContents
     },
     {
       name: 'credit',
       pointClicked: creditPointClicked,
-      setPointClicked: setCreditPointClicked
+      setPointClicked: setCreditPointClicked,
+      contents: creditSectionContents,
+      setContents: setCreditSectionContents
     }
   ];
 
-  const otherPointStates = sectionName => sectionStates
-    .filter(sectionState => sectionState.name !== sectionName)
-    .map(sectionState => ({
-      pointClicked: sectionState.pointClicked,
-      setPointClicked: sectionState.setPointClicked
+  const otherPointStates = sectionName => sections
+    .filter(section => section.name !== sectionName)
+    .map(section => ({
+      pointClicked: section.pointClicked,
+      setPointClicked: section.setPointClicked
     }));
 
+  const fetchPanelContents = (name, contents, setContents) => {
+    if (contents.length === 0) {
+      getEntries(name).then(response => {
+        setContents(response.items.map(panelContent => panelContent.fields));
+      }).catch(err => {
+        console.log(err);
+      });
+    }
+  };
+
   return (
-    sectionStates.map(sectionState => (
-      <Panel
-        key={sectionState.name}
-        sectionName={sectionState.name}
-        currentPointClicked={sectionState.pointClicked}
-        setCurrentPointClicked={sectionState.setPointClicked}
-        otherPointStates={otherPointStates(sectionState.name)}
+    <>
+      <Navbar
+        sections={sections}
+        otherPointStates={otherPointStates}
+        fetchPanelContents={fetchPanelContents}
       />
-    ))
+      {sections.map(section => (
+        <Panel
+          key={section.name}
+          sectionName={section.name}
+          currentPointClicked={section.pointClicked}
+          setCurrentPointClicked={section.setPointClicked}
+          sectionContents={section.contents}
+          setSectionContents={section.setContents}
+          otherPointStates={otherPointStates}
+          fetchPanelContents={fetchPanelContents}
+        />
+      ))}
+    </>
   );
 };
 

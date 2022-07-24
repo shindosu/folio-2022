@@ -1,8 +1,25 @@
+/* eslint-disable */
+
 import { useState } from 'react';
 
-const Navbar = () => {
-  const navLinks = ['Home', 'About', 'Philosophy', 'Works', 'Contact', 'Credits'];
+const Navbar = props => {
+  const { sections, otherPointStates, fetchPanelContents } = props;
   const [hamburgerClicked, setHamburgerClicked] = useState(false);
+
+  const togglePanel = sectionName => {
+    otherPointStates(sectionName).forEach(otherPointState => {
+      if (otherPointState.pointClicked) otherPointState.setPointClicked(false);
+    });
+
+    if (sectionName === 'home') return;
+
+    const section = sections.find(sectionData => sectionData.name === sectionName);
+
+    setTimeout(() => {
+      section.setPointClicked(true);
+      fetchPanelContents(sectionName, section.contents, section.setContents);
+    }, 1000);
+  };
 
   return (
     <>
@@ -15,7 +32,26 @@ const Navbar = () => {
       </nav>
       <div className={`menu ${hamburgerClicked ? 'is-active' : ''}`}>
         <ul>
-          {navLinks.map(navLink => <li className="nav-links" id={`nav-${navLink.toLowerCase()}-link`} key={navLink}>{navLink}</li>)}
+          <li
+            className="nav-links"
+            id="nav-home-link"
+            onClick={() => togglePanel('home')}
+            onKeyDown={() => togglePanel('home')}
+            role="presentation"
+          >
+            Home
+          </li>
+          {sections.map(section => (
+            <li
+              className="nav-links"
+              id={`nav-${section.name}-link`}
+              key={section.name}
+              onClick={() => togglePanel(section.name)}
+              role="presentation"
+            >
+              {section.name[0].toUpperCase() + section.name.slice(1).toLowerCase()}
+            </li>
+          ))}
         </ul>
       </div>
     </>

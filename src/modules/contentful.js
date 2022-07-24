@@ -6,4 +6,21 @@ const client = contentful.createClient({
   environment: 'master'
 });
 
-export default client;
+const contentType = text => {
+  switch (text) {
+    case 'works':
+      return 'work';
+    case 'contact':
+      return 'social';
+    case 'credit':
+      return 'source';
+
+    default:
+      return text;
+  }
+};
+
+const getEntries = text => client
+  .getEntries({ content_type: contentType(text) });
+
+export default getEntries;
