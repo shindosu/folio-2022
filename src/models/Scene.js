@@ -36,7 +36,7 @@ class Scene {
       },
       {
         position: new THREE.Vector3(3.0, 0, -15.5),
-        element: document.getElementById('point-work')
+        element: document.getElementById('point-works')
       },
       {
         position: new THREE.Vector3(-1.0, 0, -15.5),
@@ -100,7 +100,7 @@ class Scene {
             gsapTo(this.camera.position, 2.3, -0.7, -12.8, this.controls, 'camera');
 
             break;
-          case 'nav-credits-link':
+          case 'nav-credit-link':
             gsapTo(this.controls.target, -6.5, -2.8, -21.5, this.controls, 'controls');
             gsapTo(this.camera.position, 5.8, -0.4, -31.0, this.controls, 'camera');
 
