@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
-import client from './modules/contentful';
 import Scene from './models/Scene';
+import getEntries from './modules/contentful';
 
 const Canvas = () => {
   const canvas = useRef();
 
   useEffect(() => {
-    client.getEntries({ content_type: 'texture' }).then(response => {
+    getEntries('texture').then(response => {
       new Scene(
         canvas.current,
         response.items.map(item => ({
