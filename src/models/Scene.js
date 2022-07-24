@@ -28,23 +28,28 @@ class Scene {
     this.points = [
       {
         position: new THREE.Vector3(3.0, 0, -9.5),
-        element: document.getElementById('point-about')
+        outerElement: document.getElementById('outer-point-about'),
+        innerElement: document.getElementById('inner-point-about')
       },
       {
         position: new THREE.Vector3(-3.0, 0, -9.5),
-        element: document.getElementById('point-philosophy')
+        outerElement: document.getElementById('outer-point-philosophy'),
+        innerElement: document.getElementById('inner-point-philosophy')
       },
       {
         position: new THREE.Vector3(3.0, 0, -15.5),
-        element: document.getElementById('point-works')
+        outerElement: document.getElementById('outer-point-works'),
+        innerElement: document.getElementById('inner-point-works')
       },
       {
         position: new THREE.Vector3(-1.0, 0, -15.5),
-        element: document.getElementById('point-contact')
+        outerElement: document.getElementById('outer-point-contact'),
+        innerElement: document.getElementById('inner-point-contact')
       },
       {
         position: new THREE.Vector3(0, 0, -18.5),
-        element: document.getElementById('point-credit')
+        outerElement: document.getElementById('outer-point-credit'),
+        innerElement: document.getElementById('inner-point-credit')
       }
     ];
     this.raycaster = new THREE.Raycaster();
@@ -57,6 +62,7 @@ class Scene {
 
     this.#addModel();
     this.#moveCamera();
+    this.#moveCameraOnPointClick();
     // this.#addDebugger();
 
     this.scene.background = new THREE.Color(colorCode.spindle);
@@ -75,6 +81,45 @@ class Scene {
   //   debugConsole.ocean(this.ocean.material.uniforms, this.ocean.position);
   //   debugConsole.sky(this.scene.background);
   // }
+
+  #moveCameraOnPointClick() {
+    this.points.forEach(point => {
+      point.innerElement.addEventListener('click', event => {
+        switch (event.target.id) {
+          case 'inner-point-about':
+            gsapTo(this.controls.target, 12.1, 0.0, -14.0, this.controls, 'controls');
+            gsapTo(this.camera.position, -1.7, -0.8, -6.5, this.controls, 'camera');
+
+            break;
+          case 'inner-point-philosophy':
+            gsapTo(this.controls.target, -11.3, 0.8, -4.2, this.controls, 'controls');
+            gsapTo(this.camera.position, 2.3, -0.9, -11.7, this.controls, 'camera');
+
+            break;
+          case 'inner-point-works':
+            gsapTo(this.controls.target, 7.7, 0.3, -19.0, this.controls, 'controls');
+            gsapTo(this.camera.position, -0.9, -0.7, -13.6, this.controls, 'camera');
+
+            break;
+          case 'inner-point-contact':
+            gsapTo(this.controls.target, -7.0, -0.7, -17.0, this.controls, 'controls');
+            gsapTo(this.camera.position, 2.3, -0.7, -12.8, this.controls, 'camera');
+
+            break;
+          case 'inner-point-credit':
+            gsapTo(this.controls.target, -6.5, -2.8, -21.5, this.controls, 'controls');
+            gsapTo(this.camera.position, 5.8, -0.4, -31.0, this.controls, 'camera');
+
+            break;
+          default:
+            gsapTo(this.controls.target, -1.6, -0.4, 2.1, this.controls, 'controls');
+            gsapTo(this.camera.position, -5.7, -0.5, 11.5, this.controls, 'camera');
+
+            break;
+        }
+      });
+    });
+  }
 
   #moveCamera() {
     document.querySelectorAll('.nav-links').forEach(navLink => {
@@ -123,24 +168,24 @@ class Scene {
       screenPosition.project(this.camera);
       this.raycaster.setFromCamera(screenPosition, this.camera);
 
-      if (point.element) {
+      if (point.outerElement) {
         if (intersects.length === 0) {
-          point.element.classList.add('show');
+          point.outerElement.classList.add('show');
         } else {
           const intersectionDistance = intersects[0].distance;
           const pointDistance = point.position.distanceTo(this.camera.position);
 
           if (intersectionDistance < pointDistance) {
-            point.element.classList.remove('show');
+            point.outerElement.classList.remove('show');
           } else {
-            point.element.classList.add('show');
+            point.outerElement.classList.add('show');
           }
         }
       }
 
       const translateX = screenPosition.x * window.innerWidth * 0.5;
       const translateY = -screenPosition.y * window.innerHeight * 0.5;
-      point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
+      point.outerElement.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
     });
   }
 

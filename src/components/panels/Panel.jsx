@@ -13,20 +13,21 @@ const Panel = props => {
     fetchPanelContents
   } = props;
 
-  const togglePanel = boolean => {
+  const togglePanel = clicked => {
     otherPointStates(sectionName).forEach(otherPointState => {
       if (otherPointState.pointClicked) otherPointState.setPointClicked(false);
     });
 
-    setCurrentPointClicked(boolean);
-
-    fetchPanelContents(sectionName, sectionContents, setSectionContents);
+    setTimeout(() => {
+      setCurrentPointClicked(clicked);
+      fetchPanelContents(sectionName, sectionContents, setSectionContents);
+    }, 1000);
   };
 
   return (
     <>
-      <button className="point outer-circle" id={`point-${sectionName}`} onClick={() => togglePanel(true)} onKeyDown={() => togglePanel(true)} type="button">
-        <div className="inner-circle" />
+      <button className="point outer-circle" id={`outer-point-${sectionName}`} onClick={() => togglePanel(true)} onKeyDown={() => togglePanel(true)} type="button">
+        <div className="inner-circle" id={`inner-point-${sectionName}`}/>
       </button>
       <div className={`panel ${currentPointClicked ? 'show' : ''}`}>
         <button onClick={() => togglePanel(false)} onKeyDown={() => togglePanel(false)} type="button">CLOSE</button>
