@@ -13,14 +13,15 @@ const Panel = props => {
     fetchPanelContents
   } = props;
 
-  const togglePanel = boolean => {
+  const togglePanel = clicked => {
     otherPointStates(sectionName).forEach(otherPointState => {
       if (otherPointState.pointClicked) otherPointState.setPointClicked(false);
     });
 
-    setCurrentPointClicked(boolean);
-
-    fetchPanelContents(sectionName, sectionContents, setSectionContents);
+    setTimeout(() => {
+      setCurrentPointClicked(clicked);
+      fetchPanelContents(sectionName, sectionContents, setSectionContents);
+    }, 1000);
   };
 
   return (
