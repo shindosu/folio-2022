@@ -9,7 +9,7 @@ const client = contentful.createClient({
 const contentType = text => {
   switch (text) {
     case 'works':
-      return 'work';
+      return 'project';
     case 'contact':
       return 'social';
     case 'credit':

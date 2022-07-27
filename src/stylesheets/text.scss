@@ -1,0 +1,15 @@
+@import './colors.scss';
+
+h1 {
+  font-family: 'Avenir Medium';
+  font-size: 30px;
+  line-height: 30px;
+  color: $text-gray;
+  font-weight: 100;
+}
+
+a, a:visited, p, span {
+  color: $text-light-gray;
+  font-family: 'Avenir Light';
+  font-size: 15px;
+}
