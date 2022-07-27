@@ -1,7 +1,3 @@
-const monthYear = timestamp => {
-  const date = new Date(timestamp);
-
-  return `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
+Date.prototype.monthYear = function () {
+  return `${this.toLocaleString('default', { month: 'long' })} ${this.getFullYear()}`;
 };
-
-export default monthYear;
