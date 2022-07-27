@@ -6,6 +6,7 @@
   top: 10px;
   padding: 15px 15px;
   display: inline-block;
+  z-index: 2;
   cursor: pointer;
   transition-property: opacity, filter;
   transition-duration: 0.15s;
@@ -16,14 +17,16 @@
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  overflow: visible; }
+  overflow: visible;
+}
   .hamburger:hover {
     cursor: pointer;
   }
   .hamburger.is-active .hamburger-inner,
   .hamburger.is-active .hamburger-inner::before,
   .hamburger.is-active .hamburger-inner::after {
-    background-color: $navbar-icon; }
+    background-color: $navbar-icon;
+  }
 
 .hamburger-box {
   width: 40px;
@@ -106,11 +109,32 @@
         transition: top 0.1s 0.16s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.25s cubic-bezier(0.215, 0.61, 0.355, 1); }
 
 .menu {
-  // display: none;
-  // &.is-active {
-  //   display: inline-block;
-  // }
-  // position: absolute;
-  // right: 0;
-  // top: 100px;
+  height: 100%;
+  width: 500px;
+  position: absolute;
+  right: -500px;
+  background-color: $pure-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.8s cubic-bezier(.21,.39,.2,.96);
+  &.show {
+    transform: translateX(-500px);
+  }
+  ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 500px;
+    li {
+      font-family: 'Avenir Medium';
+      list-style: none;
+      color: $text-gray;
+      font-size: 25px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }

@@ -30,7 +30,7 @@ const Navbar = props => {
           </span>
         </button>
       </nav>
-      <div className={`menu ${hamburgerClicked ? 'is-active' : ''}`}>
+      <div className={`menu ${hamburgerClicked ? 'show' : ''}`}>
         <ul>
           <li
             className="nav-link"
