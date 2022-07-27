@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 
 const Anchor = props => {
-  const { url, anchorText } = props;
+  const { url, text } = props;
 
   return (
-    <a href={url} target="_blank" rel="noreferrer">{anchorText}</a>
+    <a href={url} target="_blank" rel="noreferrer">{text}</a>
   );
 };
 
