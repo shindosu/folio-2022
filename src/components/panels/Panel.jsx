@@ -9,6 +9,7 @@ import Credit from './contents/Credit';
 const Panel = props => {
   const {
     sectionName,
+    navigationTexts,
     currentPointClicked,
     setCurrentPointClicked,
     sectionContents,
@@ -58,10 +59,10 @@ const Panel = props => {
           <div className="navigation-icon">
             <ChevronLeft className="icon-chevron" />
             {' '}
-            <span>back</span>
+            <span>{navigationTexts.previous.upCase()}</span>
           </div>
           <div className="navigation-icon">
-            <span>next</span>
+            <span>{navigationTexts.next.upCase()}</span>
             {' '}
             <ChevronRight className="icon-chevron" />
           </div>

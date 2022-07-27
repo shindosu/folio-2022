@@ -41,6 +41,8 @@
             "jsx": "never"
         }
       ],
-      "no-param-reassign": [2, { "props": false }]
+      "no-param-reassign": [2, { "props": false }],
+      "no-extend-native": ["error", { "exceptions": ["String"] }],
+      "func-names": 0
     }
 }

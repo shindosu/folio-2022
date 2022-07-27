@@ -71,6 +71,29 @@ const Panels = () => {
     }
   };
 
+  const navigationTexts = currentSection => {
+    const currentIndex = sections.indexOf(currentSection);
+    const totalSections = sections.length;
+
+    switch (currentIndex) {
+      case 0:
+        return {
+          previous: 'Home',
+          next: sections[currentIndex + 1].name
+        };
+      case totalSections - 1:
+        return {
+          previous: sections[totalSections - 1].name,
+          next: sections[0].name
+        };
+      default:
+        return {
+          previous: sections[currentIndex - 1].name,
+          next: sections[currentIndex + 1].name
+        };
+    }
+  };
+
   return (
     <>
       <Navbar
@@ -81,6 +104,7 @@ const Panels = () => {
       {sections.map(section => (
         <Panel
           key={section.name}
+          navigationTexts={navigationTexts(section)}
           sectionName={section.name}
           currentPointClicked={section.pointClicked}
           setCurrentPointClicked={section.setPointClicked}

@@ -49,7 +49,7 @@ const Navbar = props => {
               onClick={() => togglePanel(section.name)}
               role="presentation"
             >
-              {section.name[0].toUpperCase() + section.name.slice(1).toLowerCase()}
+              {section.name.upCase()}
             </li>
           ))}
         </ul>

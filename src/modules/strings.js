@@ -1,9 +1,3 @@
-const oneWord = text => text.indexOf(' ') === -1;
-
-const splitText = text => {
-  if (oneWord(text)) return;
-
-  text.split(' ');
+String.prototype.upCase = function () {
+  return this[0].toUpperCase() + this.slice(1).toLowerCase();
 };
-
-export { oneWord, splitText };
