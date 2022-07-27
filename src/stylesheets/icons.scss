@@ -1,0 +1,22 @@
+@import './colors.scss';
+
+svg {
+  color: $text-gray;
+}
+
+.icon {
+  &-close {
+    font-size: 25px;
+    padding: 15px 20px 5px 0px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &-chevron {
+    color: $text-light-gray;
+  }
+  &-social {
+    size: 20px;
+    color: $text-light-gray;
+  }
+}
