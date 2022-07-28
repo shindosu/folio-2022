@@ -65,30 +65,32 @@ const Panel = props => {
       );
     }, 1000);
   };
+
+  //   <button className="point outer-circle" id={`outer-point-${sectionName}`}
+  // onClick={() => togglePanel(true)} onKeyDown={() => togglePanel(true)} type="button">
+  //   <div className="inner-circle" id={`inner-point-${sectionName}`} />
+  // </button>
   return (
-    <>
-      <div className="labels" />
-      <div className={`panel ${currentPointClicked ? 'show' : ''}`}>
-        <div className="close-icon-wrapper">
-          <CloseIcon className="icon-close" onClick={() => togglePanel(false)} onKeyDown={() => togglePanel(false)} />
+    <div className={`panel ${currentPointClicked ? 'show' : ''}`}>
+      <div className="close-icon-wrapper">
+        <CloseIcon className="icon-close" onClick={() => togglePanel(false)} onKeyDown={() => togglePanel(false)} />
+      </div>
+      <div className={`contents-wrapper ${sectionName === 'works' ? 'works' : ''}`}>
+        {contents(sectionContents)}
+      </div>
+      <div className="navigation-footer">
+        <div className="navigation-icon" id={`previous-${toSection('previous')}`} onClick={() => togglePanelForSection('previous')} onKeyDown={() => togglePanelForSection('previous')} role="presentation">
+          <ChevronLeft className="icon-chevron" />
+          {' '}
+          <span>{toSection('previous').upCase()}</span>
         </div>
-        <div className={`contents-wrapper ${sectionName === 'works' ? 'works' : ''}`}>
-          {contents(sectionContents)}
-        </div>
-        <div className="navigation-footer">
-          <div className="navigation-icon" id={`previous-${toSection('previous')}`} onClick={() => togglePanelForSection('previous')} onKeyDown={() => togglePanelForSection('previous')} role="presentation">
-            <ChevronLeft className="icon-chevron" />
-            {' '}
-            <span>{toSection('previous').upCase()}</span>
-          </div>
-          <div className="navigation-icon" id={`next-${toSection('next')}`} onClick={() => togglePanelForSection('next')} onKeyDown={() => togglePanelForSection('next')} role="presentation">
-            <span>{toSection('next').upCase()}</span>
-            {' '}
-            <ChevronRight className="icon-chevron" />
-          </div>
+        <div className="navigation-icon" id={`next-${toSection('next')}`} onClick={() => togglePanelForSection('next')} onKeyDown={() => togglePanelForSection('next')} role="presentation">
+          <span>{toSection('next').upCase()}</span>
+          {' '}
+          <ChevronRight className="icon-chevron" />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
