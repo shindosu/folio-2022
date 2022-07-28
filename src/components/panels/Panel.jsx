@@ -43,6 +43,29 @@ const Panel = props => {
     }
   };
 
+  const toSection = direction => {
+    if (typeof navigationTexts[direction] === 'string') return navigationTexts[direction];
+
+    return navigationTexts[direction].name;
+  };
+
+  const togglePanelForSection = direction => {
+    setCurrentPointClicked(false);
+
+    const sectionPanel = navigationTexts[direction];
+
+    if (sectionPanel === 'home') return;
+
+    setTimeout(() => {
+      sectionPanel.setPointClicked(true);
+      fetchPanelContents(
+        sectionPanel.name,
+        sectionPanel.contents,
+        sectionPanel.setContents
+      );
+    }, 1000);
+  };
+
   return (
     <>
       <button className="point outer-circle" id={`outer-point-${sectionName}`} onClick={() => togglePanel(true)} onKeyDown={() => togglePanel(true)} type="button">
@@ -56,13 +79,13 @@ const Panel = props => {
           {contents(sectionContents)}
         </div>
         <div className="navigation-footer">
-          <div className="navigation-icon">
+          <div className="navigation-icon" id={`previous-${toSection('previous')}`} onClick={() => togglePanelForSection('previous')} onKeyDown={() => togglePanelForSection('previous')} role="presentation">
             <ChevronLeft className="icon-chevron" />
             {' '}
-            <span>{navigationTexts.previous.upCase()}</span>
+            <span>{toSection('previous').upCase()}</span>
           </div>
-          <div className="navigation-icon">
-            <span>{navigationTexts.next.upCase()}</span>
+          <div className="navigation-icon" id={`next-${toSection('next')}`} onClick={() => togglePanelForSection('next')} onKeyDown={() => togglePanelForSection('next')} role="presentation">
+            <span>{toSection('next').upCase()}</span>
             {' '}
             <ChevronRight className="icon-chevron" />
           </div>

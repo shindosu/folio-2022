@@ -44,7 +44,11 @@
     &-icon {
       display: flex;
       align-items: center;
+      &:hover {
+        cursor: pointer;
+      }
       svg, span {
+        pointer-events: none;
         color: $text-gray;
       }
     }

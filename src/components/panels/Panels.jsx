@@ -78,18 +78,18 @@ const Panels = () => {
     switch (currentIndex) {
       case 0:
         return {
-          previous: 'Home',
-          next: sections[currentIndex + 1].name
+          previous: 'home',
+          next: sections[currentIndex + 1]
         };
       case totalSections - 1:
         return {
-          previous: sections[totalSections - 1].name,
-          next: sections[0].name
+          previous: sections[totalSections - 1],
+          next: 'home'
         };
       default:
         return {
-          previous: sections[currentIndex - 1].name,
-          next: sections[currentIndex + 1].name
+          previous: sections[currentIndex - 1],
+          next: sections[currentIndex + 1]
         };
     }
   };

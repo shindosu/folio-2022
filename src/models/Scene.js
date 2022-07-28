@@ -65,6 +65,7 @@ class Scene {
     this.#addModel();
     this.#moveCamera();
     this.#moveCameraOnPointClick();
+    this.#moveCameraOnPanelNavigationClick();
     // this.#addDebugger();
 
     this.scene.background = new THREE.Color(colorCode.spindle);
@@ -148,6 +149,48 @@ class Scene {
 
             break;
           case 'nav-credit-link':
+            gsapTo(this.controls.target, -6.5, -2.8, -21.5, this.controls, 'controls');
+            gsapTo(this.camera.position, 5.8, -0.4, -31.0, this.controls, 'camera');
+
+            break;
+          default:
+            gsapTo(this.controls.target, -1.6, -0.4, 2.1, this.controls, 'controls');
+            gsapTo(this.camera.position, -5.7, -0.5, 11.5, this.controls, 'camera');
+
+            break;
+        }
+      });
+    });
+  }
+
+  #moveCameraOnPanelNavigationClick() {
+    document.querySelectorAll('.navigation-icon').forEach(navigationIcon => {
+      navigationIcon.addEventListener('click', event => {
+        switch (event.target.id) {
+          case 'previous-about':
+            gsapTo(this.controls.target, 12.1, 0.0, -14.0, this.controls, 'controls');
+            gsapTo(this.camera.position, -1.7, -0.8, -6.5, this.controls, 'camera');
+
+            break;
+          case 'next-philosophy':
+          case 'previous-philosophy':
+            gsapTo(this.controls.target, -11.3, 0.8, -4.2, this.controls, 'controls');
+            gsapTo(this.camera.position, 2.3, -0.9, -11.7, this.controls, 'camera');
+
+            break;
+          case 'next-works':
+          case 'previous-works':
+            gsapTo(this.controls.target, 7.7, 0.3, -19.0, this.controls, 'controls');
+            gsapTo(this.camera.position, -0.9, -0.7, -13.6, this.controls, 'camera');
+
+            break;
+          case 'next-contact':
+          case 'previous-contact':
+            gsapTo(this.controls.target, -7.0, -0.7, -17.0, this.controls, 'controls');
+            gsapTo(this.camera.position, 2.3, -0.7, -12.8, this.controls, 'camera');
+
+            break;
+          case 'next-credit':
             gsapTo(this.controls.target, -6.5, -2.8, -21.5, this.controls, 'controls');
             gsapTo(this.camera.position, 5.8, -0.4, -31.0, this.controls, 'camera');
 
