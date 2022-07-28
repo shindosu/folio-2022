@@ -2,8 +2,7 @@
 @import './fonts.scss';
 
 .panel {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0.98;
   position: fixed;
   top: 0;
   left: -500px;
@@ -13,8 +12,6 @@
   width: 500px;
   transition: transform 0.8s cubic-bezier(.21,.39,.2,.96);
   &.show {
-    opacity: 0.98;
-    pointer-events: all;
     transform: translateX(500px);
   }
   .close-icon-wrapper {
