@@ -192,7 +192,6 @@ class Scene {
 
             break;
           case 'next-credit':
-          case 'previous-credit':
             gsapTo(this.controls.target, -6.5, -2.8, -21.5, this.controls, 'controls');
             gsapTo(this.camera.position, 5.8, -0.4, -31.0, this.controls, 'camera');
 
