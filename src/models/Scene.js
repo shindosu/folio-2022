@@ -69,7 +69,7 @@ class Scene {
     // this.#addDebugger();
 
     this.scene.background = new THREE.Color(colorCode.spindle);
-    // this.scene.add(this.ocean);
+    this.scene.add(this.ocean);
     this.scene.add(this.camera);
 
     this.#tick();
@@ -192,6 +192,7 @@ class Scene {
 
             break;
           case 'next-credit':
+          case 'previous-credit':
             gsapTo(this.controls.target, -6.5, -2.8, -21.5, this.controls, 'controls');
             gsapTo(this.camera.position, 5.8, -0.4, -31.0, this.controls, 'camera');
 
@@ -239,27 +240,27 @@ class Scene {
     this.gltfLoader.load(
       this.modelPath,
       gltf => {
-        // const meshes = gltf.scene.children;
+        const meshes = gltf.scene.children;
 
-        // this.textures.forEach(texture => {
-        //   const mesh = meshes.find(child => texture.fileName === child.name);
+        this.textures.forEach(texture => {
+          const mesh = meshes.find(child => texture.fileName === child.name);
 
-        //   if (mesh) this.#applyTexture(mesh, texture.imageUrl);
-        // });
+          if (mesh) this.#applyTexture(mesh, texture.imageUrl);
+        });
 
-        // this.boat = meshes.find(child => child.name === 'boat');
-        // this.boat.position.y = Math.sin(Math.PI);
+        this.boat = meshes.find(child => child.name === 'boat');
+        this.boat.position.y = Math.sin(Math.PI);
 
-        // this.#applyTexture(
-        //   this.boat,
-        //   this.textures.find(texture => texture.fileName === 'land_bridge').imageUrl
-        // );
-        // staticMaterials.default.forEach(nonTextureMaterial => {
-        //   const mesh = meshes.find(child => nonTextureMaterial.fileName === child.name);
+        this.#applyTexture(
+          this.boat,
+          this.textures.find(texture => texture.fileName === 'land_bridge').imageUrl
+        );
+        staticMaterials.default.forEach(nonTextureMaterial => {
+          const mesh = meshes.find(child => nonTextureMaterial.fileName === child.name);
 
-        //   mesh.material = nonTextureMaterial.material;
-        // });
-        // this.boat.position.y = -1.5;
+          mesh.material = nonTextureMaterial.material;
+        });
+        this.boat.position.y = -1.5;
         this.scene.add(gltf.scene);
       }
     );
@@ -302,7 +303,7 @@ class Scene {
   }
 
   #tick() {
-    // this.ocean.material.uniforms.time.value += 1.0 / 300.0;
+    this.ocean.material.uniforms.time.value += 1.0 / 300.0;
 
     if (this.boat) this.boat.position.y = 0.05 * Math.sin(this.clock.getElapsedTime()) - 1.5;
 

@@ -83,7 +83,7 @@ const Panels = () => {
         };
       case totalSections - 1:
         return {
-          previous: sections[totalSections - 1],
+          previous: sections[totalSections - 2],
           next: 'home'
         };
       default:
