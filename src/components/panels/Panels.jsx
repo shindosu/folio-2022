@@ -46,7 +46,7 @@ const Panels = () => {
       setContents: setContactSectionContents
     },
     {
-      name: 'credit',
+      name: 'credits',
       pointClicked: creditPointClicked,
       setPointClicked: setCreditPointClicked,
       contents: creditSectionContents,
