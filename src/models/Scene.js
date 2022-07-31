@@ -82,35 +82,6 @@ class Scene {
   //   debugConsole.sky(this.scene.background);
   // }
 
-  // #togglePointDisplay() {
-  //   this.points.forEach(point => {
-  //     const screenPosition = point.position.clone();
-  //     const intersects = this.raycaster.intersectObjects(this.scene.children, true);
-
-  //     screenPosition.project(this.camera);
-  //     this.raycaster.setFromCamera(screenPosition, this.camera);
-
-  //     if (point.outerElement) {
-  //       if (intersects.length === 0) {
-  //         point.outerElement.classList.add('show');
-  //       } else {
-  //         const intersectionDistance = intersects[0].distance;
-  //         const pointDistance = point.position.distanceTo(this.camera.position);
-
-  //         if (intersectionDistance < pointDistance) {
-  //           point.outerElement.classList.remove('show');
-  //         } else {
-  //           point.outerElement.classList.add('show');
-  //         }
-  //       }
-  //     }
-
-  //     const translateX = screenPosition.x * window.innerWidth * 0.5;
-  //     const translateY = -screenPosition.y * window.innerHeight * 0.5;
-  //     point.outerElement.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
-  //   });
-  // }
-
   #addModel() {
     this.gltfLoader.load(
       this.modelPath,
