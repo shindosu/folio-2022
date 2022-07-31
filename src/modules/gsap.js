@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 
-const gsapTo = (target, x, y, z, controls, targetType) => {
+const gsapTo = (target, x, y, z, controls, targetType, section = null) => {
   if (targetType === 'controls') controls.enabled = false;
 
   gsap.to(
@@ -15,7 +15,7 @@ const gsapTo = (target, x, y, z, controls, targetType) => {
         if (targetType === 'camera') controls.update();
       },
       onComplete: () => {
-        if (targetType === 'camera') controls.enabled = true;
+        if (section === 'home') controls.enabled = true;
       }
     }
   );

@@ -125,7 +125,8 @@ class Controller extends OrbitControls {
           this.camera.position,
           ...Object.values(this.camera.constructor.positions.home),
           this,
-          'camera'
+          'camera',
+          'home'
         );
 
         break;
