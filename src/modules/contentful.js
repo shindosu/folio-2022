@@ -12,7 +12,7 @@ const contentType = text => {
       return 'project';
     case 'contact':
       return 'social';
-    case 'credit':
+    case 'credits':
       return 'source';
 
     default:
