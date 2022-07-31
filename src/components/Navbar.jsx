@@ -33,7 +33,7 @@ const Navbar = props => {
       <div className={`menu ${hamburgerClicked ? 'show' : ''}`}>
         <ul>
           <li
-            className="nav-link"
+            className={"nav-link home"}
             id="nav-home-link"
             onClick={() => togglePanel('home')}
             onKeyDown={() => togglePanel('home')}
@@ -43,7 +43,7 @@ const Navbar = props => {
           </li>
           {sections.map(section => (
             <li
-              className="nav-link"
+              className={`nav-link ${section.name}`}
               id={`nav-${section.name}-link`}
               key={section.name}
               onClick={() => togglePanel(section.name)}
