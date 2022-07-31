@@ -42,7 +42,7 @@
         }
       ],
       "no-param-reassign": [2, { "props": false }],
-      "no-extend-native": ["error", { "exceptions": ["String", "Date"] }],
+      "no-extend-native": ["error", { "exceptions": ["String", "Date", "Array"] }],
       "func-names": 0
     }
 }
