@@ -35,8 +35,14 @@ const Navbar = props => {
           <li
             className={"nav-link home"}
             id="nav-home-link"
-            onClick={() => togglePanel('home')}
-            onKeyDown={() => togglePanel('home')}
+            onClick={() => {
+              togglePanel('home');
+              setHamburgerClicked(false);
+            }}
+            onKeyDown={() => {
+              togglePanel('home');
+              setHamburgerClicked(false);
+            }}
             role="presentation"
           >
             Home
@@ -46,7 +52,14 @@ const Navbar = props => {
               className={`nav-link ${section.name}`}
               id={`nav-${section.name}-link`}
               key={section.name}
-              onClick={() => togglePanel(section.name)}
+              onClick={() => {
+                togglePanel(section.name);
+                setHamburgerClicked(false);
+              }}
+              onKeyDown={() => {
+                togglePanel(section.name);
+                setHamburgerClicked(false);
+            }}
               role="presentation"
             >
               {section.name.upCase()}
