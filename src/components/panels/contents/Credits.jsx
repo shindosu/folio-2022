@@ -4,7 +4,7 @@ import Heading from '../../shared/texts/Heading';
 import Paragraph from '../../shared/texts/Paragraph';
 import Anchor from '../../shared/Anchor';
 
-const Credit = props => {
+const Credits = props => {
   const { contents } = props;
 
   return (
@@ -33,4 +33,4 @@ const Credit = props => {
   );
 };
 
-export default Credit;
+export default Credits;

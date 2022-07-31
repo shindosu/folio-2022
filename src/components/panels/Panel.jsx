@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import Default from './contents/Default';
 import Contact from './contents/Contact';
 import Works from './contents/Works';
-import Credit from './contents/Credit';
+import Credits from './contents/Credits';
 
 const Panel = props => {
   const {
@@ -37,7 +37,7 @@ const Panel = props => {
       case 'contact':
         return <Contact contents={sectionContents} />;
       case 'credits':
-        return <Credit contents={sectionContents} />;
+        return <Credits contents={sectionContents} />;
       default:
         return <Default contents={sectionContents} />;
     }
