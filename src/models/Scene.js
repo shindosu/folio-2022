@@ -241,26 +241,31 @@ class Scene {
       gltf => {
         const meshes = gltf.scene.children;
 
-        this.textures.forEach(texture => {
-          const mesh = meshes.find(child => texture.fileName === child.name);
+        if (this.textures.length === 0) {
+          this.scene.add(gltf.scene);
+        } else {
+          this.textures.forEach(texture => {
+            const mesh = meshes.find(child => texture.fileName === child.name);
 
-          if (mesh) this.#applyTexture(mesh, texture.imageUrl);
-        });
+            if (mesh) this.#applyTexture(mesh, texture.imageUrl);
+          });
 
-        this.boat = meshes.find(child => child.name === 'boat');
-        this.boat.position.y = Math.sin(Math.PI);
+          this.boat = meshes.find(child => child.name === 'boat');
+          this.boat.position.y = Math.sin(Math.PI);
 
-        this.#applyTexture(
-          this.boat,
-          this.textures.find(texture => texture.fileName === 'land_bridge').imageUrl
-        );
-        staticMaterials.default.forEach(nonTextureMaterial => {
-          const mesh = meshes.find(child => nonTextureMaterial.fileName === child.name);
+          this.#applyTexture(
+            this.boat,
+            this.textures.find(texture => texture.fileName === 'land_bridge').imageUrl
+          );
+          staticMaterials.default.forEach(nonTextureMaterial => {
+            const mesh = meshes.find(child => nonTextureMaterial.fileName === child.name);
 
-          mesh.material = nonTextureMaterial.material;
-        });
-        this.boat.position.y = -1.5;
-        this.scene.add(gltf.scene);
+            mesh.material = nonTextureMaterial.material;
+          });
+          this.boat.position.y = -1.5;
+
+          this.scene.add(gltf.scene);
+        }
       }
     );
   }
