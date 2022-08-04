@@ -1,0 +1,38 @@
+@import './colors.scss';
+
+.preloader {
+  width: 12%;
+  height: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 auto;
+  .dot {
+    background-color: $text-light-gray;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: moveDots 1.4s ease calc(-.1s*var(--index)) infinite;
+    &:first-child {
+      --index: 2;
+    }
+    &:nth-child(2) {
+      --index: 1;
+    }
+    &:last-child {
+      --index: 0;
+    }
+  }
+}
+
+@keyframes moveDots {
+  10% {
+    transform: translateZ(0);
+  }
+  30% {
+    transform: translate3d(0,-12px,0);
+  }
+  50% {
+    transform: translateZ(0);
+  }
+}

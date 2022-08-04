@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState, useRef } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import Default from './contents/Default';
 import Contact from './contents/Contact';
 import Works from './contents/Works';
 import Credits from './contents/Credits';
+import LazyLoader from './contents/LazyLoader';
 
 const Panel = props => {
   const {
@@ -17,6 +19,20 @@ const Panel = props => {
     otherPointStates,
     fetchPanelContents
   } = props;
+
+  const [loadedImage, setLoadedImage] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  const panel = useRef();
+
+  useEffect(() => {
+    if (sectionContents.length > 0) {
+      if (['philsophy', 'contact', 'credits'].includes(sectionName)) setLoaded(true);
+
+      const totalImages = sectionContents.filter(content => content.mainImage || content.thumbnail);
+      if (loadedImage === totalImages.length) setLoaded(true);
+    }
+  }, [loadedImage, sectionContents]);
 
   const togglePanel = clicked => {
     otherPointStates(sectionName).forEach(otherPointState => {
@@ -71,7 +87,8 @@ const Panel = props => {
       <div className="close-icon-wrapper">
         <CloseIcon className="icon-close home" onClick={() => togglePanel(false)} onKeyDown={() => togglePanel(false)} />
       </div>
-      <div className={`contents-wrapper ${sectionName === 'works' ? 'works' : ''}`}>
+      { loaded ? '' : <LazyLoader />}
+      <div className={`contents-wrapper ${sectionName === 'works' ? 'works' : ''} ${loaded ? 'loaded' : ''}`} ref={panel} onLoad={() => setLoadedImage(loadedImage + 1)}>
         {contents(sectionContents)}
       </div>
       <div className="navigation-footer">
