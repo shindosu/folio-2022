@@ -1,3 +1,4 @@
+// import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import gsapTo from '../modules/gsap';
 
@@ -26,6 +27,14 @@ class Controller extends OrbitControls {
     this.#setHomeConfig();
     this.target.set(...Object.values(this.constructor.positions.home));
     this.camera.position.set(...Object.values(this.camera.constructor.positions.home));
+
+    // this.addEventListener('change', () => {
+    //   const minPan = new THREE.Vector3(-1, 0, -15);
+    //   const maxPan = new THREE.Vector3(1, 0, 0);
+    //   this.target.clamp(minPan, maxPan);
+    //   // _v.sub(controls.target);
+    //   // camera.position.sub(_v);
+    // });
 
     this.update();
   }
@@ -145,9 +154,9 @@ class Controller extends OrbitControls {
   #setHomeConfig() {
     this.maxDistance = 15.0;
     this.minDistance = 5.0;
-    this.maxAzimuthAngle = Infinity;
-    this.minAzimuthAngle = Infinity;
-    this.minPolarAngle = Math.PI / 4;
+    this.maxAzimuthAngle = Math.PI / 8;
+    this.minAzimuthAngle = -Math.PI / 8;
+    this.minPolarAngle = -Math.PI / 8;
     this.maxPolarAngle = Math.PI / 2;
   }
 }

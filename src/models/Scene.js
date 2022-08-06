@@ -10,6 +10,8 @@ import colorCode from '../modules/colorCode';
 import Ocean from './Ocean';
 import Camera from './Camera';
 import Controller from './Controller';
+import smokeVertexShader from '../shaders/cigar_smoke/vertex.glsl'
+import smokeFragmentShader from '../shaders/cigar_smoke/fragment.glsl';
 
 class Scene {
   constructor(htmlElement, textures, modelPath) {
@@ -26,6 +28,8 @@ class Scene {
     this.clock = new THREE.Clock();
     this.ocean = Ocean.water();
     this.boat = null;
+    this.smoke = null;
+    // this.debugger = new Debugger();
     this.points = [
       {
         position: new THREE.Vector3(3.0, 0, -9.5),
@@ -74,12 +78,10 @@ class Scene {
   }
 
   // #addDebugger() {
-  //   const debugConsole = new Debugger();
-
-  //   debugConsole.orbitControls(this.controls);
-  //   debugConsole.camera(this.camera.position);
-  //   debugConsole.ocean(this.ocean.material.uniforms, this.ocean.position);
-  //   debugConsole.sky(this.scene.background);
+  //   this.debugger.orbitControls(this.controls);
+  //   this.debugger.camera(this.camera.position);
+  //   this.debugger.ocean(this.ocean.material.uniforms, this.ocean.position);
+  //   this.debugger.sky(this.scene.background);
   // }
 
   #addModel() {
@@ -96,6 +98,23 @@ class Scene {
 
             if (mesh) this.#applyTexture(mesh, texture.imageUrl);
           });
+
+          const smokeMaterial = new THREE.ShaderMaterial({
+            vertexShader: smokeVertexShader,
+            fragmentShader: smokeFragmentShader,
+            transparent: true,
+            depthWrite: false,
+            uniforms: {
+              uTime: { value: 0 },
+              uTimeFrequency: { value: 2.0 },
+              uUvFrequency: { value: new THREE.Vector2(1.81, 5) },
+              uColor: { value: new THREE.Color(colorCode.frenchGrey)}
+            }
+          })
+          smokeMaterial.side = THREE.DoubleSide;
+
+          this.smoke = meshes.find(child => child.name === 'fake_smoke');
+          this.smoke.material = smokeMaterial;
 
           this.boat = meshes.find(child => child.name === 'boat');
           this.boat.position.y = Math.sin(Math.PI);
@@ -138,10 +157,13 @@ class Scene {
   }
 
   #tick() {
+    const elapsedTime = this.clock.getElapsedTime();
+
     this.ocean.material.uniforms.time.value += 1.0 / 300.0;
-
-    if (this.boat) this.boat.position.y = 0.05 * Math.sin(this.clock.getElapsedTime()) - 1.5;
-
+    if (this.smoke) {
+      this.smoke.material.uniforms.uTime.value = elapsedTime;
+    }
+    if (this.boat) this.boat.position.y = 0.05 * Math.sin(elapsedTime) - 1.5;
     this.controls.update();
     // this.#togglePointDisplay();
 
