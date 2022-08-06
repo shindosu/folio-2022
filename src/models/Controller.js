@@ -154,10 +154,10 @@ class Controller extends OrbitControls {
   #setHomeConfig() {
     this.maxDistance = 15.0;
     this.minDistance = 5.0;
-    this.maxAzimuthAngle = Math.PI / 8;
-    this.minAzimuthAngle = -Math.PI / 8;
-    this.minPolarAngle = -Math.PI / 8;
-    this.maxPolarAngle = Math.PI / 2;
+    this.minAzimuthAngle = -40;
+    this.maxAzimuthAngle = 40;
+    this.minPolarAngle = -40;
+    this.maxPolarAngle = 40;
   }
 }
 
