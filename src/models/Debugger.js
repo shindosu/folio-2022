@@ -65,6 +65,13 @@ class Debugger {
 
     skyFolder.open();
   }
+
+  smoke(uniforms) {
+    const smokeFolder = this.gui.addFolder('Smoke');
+    smokeFolder.add(uniforms.uTimeFrequency, 'value', 0.001, 10, 0.0001);
+    smokeFolder.add(uniforms.uUvFrequency.value, 'x', 0.001, 20, 0.001);
+    smokeFolder.add(uniforms.uUvFrequency.value, 'y', 0.001, 20, 0.001);
+  }
 }
 
 export default Debugger;
