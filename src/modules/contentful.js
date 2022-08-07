@@ -20,7 +20,13 @@ const contentType = text => {
   }
 };
 
+const order = text => {
+  if (text === 'works') return '-sys.createdAt';
+
+  return 'sys.createdAt';
+};
+
 const getEntries = text => client
-  .getEntries({ content_type: contentType(text) });
+  .getEntries({ content_type: contentType(text), order: order(text) });
 
 export default getEntries;
