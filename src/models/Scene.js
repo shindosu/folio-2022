@@ -108,9 +108,9 @@ class Scene {
               uTime: { value: 0 },
               uTimeFrequency: { value: 2.0 },
               uUvFrequency: { value: new THREE.Vector2(1.81, 5) },
-              uColor: { value: new THREE.Color(colorCode.frenchGrey)}
+              uColor: { value: new THREE.Color(colorCode.frenchGrey) }
             }
-          })
+          });
           smokeMaterial.side = THREE.DoubleSide;
 
           this.smoke = meshes.find(child => child.name === 'fake_smoke');
