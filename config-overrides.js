@@ -1,5 +1,4 @@
-module.exports = function override(config, env) {
-  console.log(env);
+module.exports = function override(config) {
   config.module.rules = config.module.rules.map(rule => {
     if (rule.oneOf instanceof Array) {
       return {
