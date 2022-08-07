@@ -12,9 +12,9 @@ const Contact = props => (
     </div>
     <Paragraph>
       Think we click? Shoot me an
-      &nbsp;
+      {' '}
       <Anchor url="mailto:taiseiyamadashindosu@gmail.com" text="email" />
-      &nbsp;
+      {' '}
       or slide a DM to my socials.
     </Paragraph>
     <div className="socials">
