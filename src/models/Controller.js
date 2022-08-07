@@ -21,7 +21,9 @@ class Controller extends OrbitControls {
   }
 
   setDefaultPosition() {
-    this.enableDamping = true;
+    this.enableRotate = false;
+    this.enablePan = false;
+    this.enableDamping = false;
     this.screenSpacePanning = false;
 
     this.#setHomeConfig();
