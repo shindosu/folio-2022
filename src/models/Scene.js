@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import gsap from 'gsap';
 // import Debugger from './Debugger';
 import browser from '../modules/browser';
 import * as staticMaterials from '../modules/staticMaterial';
@@ -10,6 +11,8 @@ import Camera from './Camera';
 import Controller from './Controller';
 import smokeVertexShader from '../shaders/cigar_smoke/vertex.glsl';
 import smokeFragmentShader from '../shaders/cigar_smoke/fragment.glsl';
+import loaderVertexShader from '../shaders/intial_loader/vertex.glsl';
+import loaderFragmentShader from '../shaders/intial_loader/fragment.glsl';
 
 class Scene {
   constructor(htmlElement, textures, modelPath) {
@@ -20,7 +23,8 @@ class Scene {
     this.camera = new Camera(45, browser.width / browser.height, 0.05, 900);
     this.controls = new Controller(this.camera, this.htmlElement);
     this.renderer = new THREE.WebGLRenderer({ canvas: htmlElement, antialias: true });
-    this.textureLoader = new THREE.TextureLoader();
+    this.loadingManager = new THREE.LoadingManager();
+    this.textureLoader = new THREE.TextureLoader(this.loadingManager);
     this.dracoLoader = new DRACOLoader();
     this.gltfLoader = new GLTFLoader();
     this.clock = new THREE.Clock();
@@ -62,12 +66,12 @@ class Scene {
     this.#configureRenderer();
     this.#configureLoader();
     this.controls.setDefaultPosition();
+    this.#loadScene();
 
     this.#addModel();
     this.controls.moveCamera();
     // this.#addDebugger();
 
-    this.scene.background = new THREE.Color(colorCode.spindle);
     this.scene.add(this.ocean);
     this.scene.add(this.camera);
 
@@ -75,6 +79,40 @@ class Scene {
     this.#resize();
   }
 
+  #loadScene() {
+    const skyColor = new THREE.Color(colorCode.spindle);
+    const overlayMaterial = new THREE.ShaderMaterial({
+      vertexShader: loaderVertexShader,
+      fragmentShader: loaderFragmentShader,
+      transparent: true,
+      uniforms: {
+        uColor: { value: new THREE.Color(skyColor) },
+        uAlpha: { value: 1 }
+      }
+    });
+    const overlay = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, 1, 1), overlayMaterial);
+    this.scene.background = skyColor;
+    this.scene.add(overlay);
+
+    this.loadingManager.onProgress = (_url, itemsLoaded, itemsTotal) => {
+      const loadingBarElement = document.querySelector('.loading-bar');
+      const hamburger = document.querySelector('.hamburger');
+
+      loadingBarElement.style.transform = `scaleX(${itemsLoaded / itemsTotal})`;
+
+      if (itemsLoaded === itemsTotal) {
+        window.setTimeout(() => {
+          gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 0.5, value: 0, delay: 0.5 });
+
+          loadingBarElement.classList.add('loaded');
+          loadingBarElement.style.transform = '';
+
+          hamburger.style.opacity = 1;
+          hamburger.style.pointerEvents = 'all';
+        }, 500);
+      }
+    };
+  }
   // #addDebugger() {
   //   this.debugger.orbitControls(this.controls);
   //   this.debugger.camera(this.camera.position);
