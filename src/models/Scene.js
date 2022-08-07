@@ -10,7 +10,7 @@ import colorCode from '../modules/colorCode';
 import Ocean from './Ocean';
 import Camera from './Camera';
 import Controller from './Controller';
-import smokeVertexShader from '../shaders/cigar_smoke/vertex.glsl'
+import smokeVertexShader from '../shaders/cigar_smoke/vertex.glsl';
 import smokeFragmentShader from '../shaders/cigar_smoke/fragment.glsl';
 
 class Scene {
