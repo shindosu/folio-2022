@@ -8,13 +8,13 @@ const Panels = () => {
   const [philosophyPointClicked, setPhilosophyPointClicked] = useState(false);
   const [worksPointClicked, setWorksPointClicked] = useState(false);
   const [contactPointClicked, setContactPointClicked] = useState(false);
-  const [creditPointClicked, setCreditPointClicked] = useState(false);
+  // const [creditPointClicked, setCreditPointClicked] = useState(false);
 
   const [aboutSectionContents, setAboutSectionContents] = useState([]);
   const [philosophySectionContents, setPhilosophySectionContents] = useState([]);
   const [worksSectionContents, setWorksSectionContents] = useState([]);
   const [contactSectionContents, setContactSectionContents] = useState([]);
-  const [creditSectionContents, setCreditSectionContents] = useState([]);
+  // const [creditSectionContents, setCreditSectionContents] = useState([]);
 
   const sections = [
     {
@@ -44,14 +44,14 @@ const Panels = () => {
       setPointClicked: setContactPointClicked,
       contents: contactSectionContents,
       setContents: setContactSectionContents
-    },
-    {
-      name: 'credits',
-      pointClicked: creditPointClicked,
-      setPointClicked: setCreditPointClicked,
-      contents: creditSectionContents,
-      setContents: setCreditSectionContents
     }
+    // {
+    //   name: 'credits',
+    //   pointClicked: creditPointClicked,
+    //   setPointClicked: setCreditPointClicked,
+    //   contents: creditSectionContents,
+    //   setContents: setCreditSectionContents
+    // }
   ];
 
   const otherPointStates = sectionName => sections
